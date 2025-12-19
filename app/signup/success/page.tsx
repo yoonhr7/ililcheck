@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { getCurrentUser } from '@/lib/auth';
 import { supabase } from '@/lib/supabase';
+import { Database } from '@/lib/database.types';
 import styles from './page.module.css';
 
 export default function SignupSuccessPage() {
@@ -26,7 +27,7 @@ export default function SignupSuccessPage() {
           .from('users')
           .select('username, display_name')
           .eq('user_id', user.id)
-          .single();
+          .single<Database['public']['Tables']['users']['Row']>();
 
         if (error || !data) {
           console.error('사용자 정보 로드 실패:', error);

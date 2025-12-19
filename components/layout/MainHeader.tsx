@@ -4,6 +4,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { checkAdminStatus } from "@/lib/admin";
 import { logout } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
+import { Database } from "@/lib/database.types";
 import { LogOut, MessageCircleHeart, MoreVertical, Settings, Shield } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -32,7 +33,7 @@ export default function MainHeader() {
           .from('users')
           .select('display_name, username, role, email')
           .eq('user_id', user.id)
-          .single();
+          .single<Database['public']['Tables']['users']['Row']>();
 
         console.log('User data from DB:', data);
 
