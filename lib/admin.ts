@@ -95,7 +95,7 @@ export async function grantManagerRole(id: string): Promise<boolean> {
   try {
     const { error } = await supabase
       .from("users")
-      .update({ role: "manager" as const })
+      .update({ role: "manager" as const } as any)
       .eq("user_id", id);
 
     if (error) {
@@ -117,7 +117,7 @@ export async function revokeAdminRole(id: string): Promise<boolean> {
   try {
     const { error } = await supabase
       .from("users")
-      .update({ role: "user" as const })
+      .update({ role: "user" as const } as any)
       .eq("user_id", id);
 
     if (error) {
