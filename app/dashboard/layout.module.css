@@ -1,0 +1,19 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  background-color: #f9fafb;
+  flex-shrink: 1;
+}
+
+.main {
+  flex: 1;
+  overflow-y: auto;
+}

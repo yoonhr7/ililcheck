@@ -1,0 +1,1661 @@
+/* app/dashboard/projects/[id]/page.module.css */
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #f9fafb;
+  position: relative;
+}
+
+.header {
+  background-color: white;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 1rem 1.5rem;
+  transition: all 0.3s ease-in-out;
+}
+.headerExpanded {
+  padding-bottom: 1.5rem;
+}
+
+.headerContent {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-grow: 1;
+  gap: 0.25rem;
+}
+
+.titleSection {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.projectColorBox {
+  width: 0.25rem;
+  height: 1.25rem;
+  border-radius: 0.125rem;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.headerDates {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0;
+  padding-left: calc(0.75rem + 0.25rem); /* icon gap + icon width */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.titleInput {
+  font-family: inherit;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  padding: 0;
+  border-radius: 0.375rem;
+  background-color: #eff6ff;
+  /* border: 2px dashed #d1d5db; */
+  box-sizing: border-box;
+}
+.projectStatusInfo{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dateInputWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #111827;
+  background-color: #eff6ff;
+  /* background-color: #eff6ff;
+  border: 2px dashed #d1d5db; */
+  border-radius: 0.375rem;
+  cursor: pointer;
+}
+
+.dateSeparator {
+  color: #9ca3af;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.moreButton {
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  color: #6b7280;
+  transition: all 0.3s ease-in-out;
+}
+.moreButton:hover {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+.moreButton.moreButtonActive {
+  background-color: #eff6ff;
+  color: #3b82f6;
+}
+.moreButton.moreButtonActive svg {
+  transform: rotate(90deg);
+}
+
+.cancelButton,
+.completeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding: 0.5rem 1rem;
+  height: 2.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.cancelButton {
+  color: #6b7280;
+  background-color: white;
+  border: 1px solid #d1d5db;
+}
+.cancelButton:hover {
+  background-color: #f9fafb;
+}
+
+.completeButton {
+  color: white;
+  background-color: #3b82f6;
+  border: 1px solid #3b82f6;
+}
+.completeButton:hover {
+  background-color: #2563eb;
+}
+
+.expandedHeaderContent {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  width: 100%;
+  max-height: 1000px;
+  overflow: hidden;
+  opacity: 1;
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, margin-bottom 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.expandedHeaderContent.collapsed {
+  max-height: 0;
+  opacity: 0;
+  margin-bottom: 0;
+}
+
+.projectDetailBox {
+  background-color: #f9fafb;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.descriptionContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.descriptionArea {
+  margin: 0;
+  color: #374151;
+  line-height: 1.6;
+  font-size: 0.875rem;
+}
+
+.descriptionActions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.editDescriptionButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  line-height: 1.125rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  transition: all 0.2s;
+  border: 1px solid #e5e7eb;
+  background-color: white;
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+.editDescriptionButton:hover {
+  background-color: #f3f4f6;
+}
+
+.deleteButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  line-height: 1.125rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #dc2626;
+  transition: all 0.2s;
+  border: 1px solid #fecaca;
+  background-color: white;
+  flex-shrink: 0;
+}
+.deleteButton:hover {
+  background-color: #fef2f2;
+  border-color: #dc2626;
+}
+
+.settingsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.descriptionSettings {
+  grid-column: 1 / -1;
+}
+
+.advancedSettings {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.categorySettings,
+.colorSettings {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.descriptionTextarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  resize: vertical;
+  transition: all 0.2s ease;
+  background-color: white;
+}
+.descriptionTextarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+.categoryButtons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.categoryButton {
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  border: 1px solid;
+}
+
+.categoryButtonDefault {
+  background-color: white;
+  color: #6b7280;
+  border-color: #d1d5db;
+}
+.categoryButtonDefault:hover {
+  background-color: #f9fafb;
+}
+
+.categoryButtonSelected {
+  background-color: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+}
+
+.colorPalette {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.colorButton {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  transition: transform 0.2s;
+  border: 2px solid transparent;
+}
+.colorButton:hover {
+  transform: scale(1.1);
+}
+.colorButtonSelected {
+  border-color: #3b82f6;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Rest of the styles */
+.content { flex: 1; padding: 0; overflow-y: auto; }
+.contentInner { height: 100%; max-width: 64rem; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; width: 100%; padding: 1.5rem; }
+.card { background-color: white; border-radius: 0.5rem; border: 1px solid #e5e7eb; padding: 1.5rem; display: flex; flex-direction: column; max-height: 100%; }
+
+/* 진행률 섹션 */
+.progressSection {
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+.progressInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  width: 100%;
+  flex: 1;
+}
+.progressTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.statsChips{
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.statChip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.625rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background-color: #eff6ff;
+  color: #3b82f6;
+  border: 1px solid #3b82f6;
+  white-space: nowrap;
+}
+
+.cardHeader { flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; padding-top: 1rem; border-top: 1px solid #e5e7eb; }
+.cardTitleWrapper { display: flex; align-items: center; gap: 0.75rem; }
+.cardTitle { font-size: 1.125rem; font-weight: 600; color: #111827; }
+.cardTitleGuide { font-size: 0.75rem; font-weight: 400; color: #9ca3af; }
+.addTaskButton { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; color: #3b82f6; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 500; transition: all 0.2s; }
+.addTaskButton:hover { background-color: #eff6ff; }
+.addTaskButton:disabled { color: #9ca3af; background-color: #f3f4f6; cursor: not-allowed; }
+.addTaskInput { display: flex; gap: 0.75rem; padding: 1rem; background-color: #f9fafb; border-radius: 0.5rem; margin: 0.5rem 0; }
+.taskInput { width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.375rem; font-size: 0.875rem; }
+.taskInputActions { flex-shrink: 0; display: flex; gap: 0.5rem; justify-content: flex-end; }
+.cancelTaskBtn, .saveTaskBtn { padding: 0.375rem 0.75rem; border-radius: 0.375rem; font-size: 0.75rem; font-weight: 500; transition: all 0.2s; }
+.cancelTaskBtn { background-color: white; color: #6b7280; border: 1px solid #d1d5db; }
+.saveTaskBtn { background-color: #3b82f6; color: white; border: 1px solid #3b82f6; }
+.saveTaskBtn:disabled { background-color: #9ca3af; border-color: #9ca3af; cursor: not-allowed; }
+.emptyTaskState {
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
+  border: 2px dashed #e5e7eb;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.emptyTaskState:hover {
+  border-color: #3b82f6;
+  background-color: #eff6ff;
+}
+.emptyStateTitle {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #374151;
+  margin-bottom: 0.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+.emptyStateText {
+  color: #3b82f6;
+  font-size: 0.875rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+.tasksSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  /* max-height: calc(100vh - 392px); */
+  flex-shrink: 1;
+  height: 100%;
+  overflow-y: auto;
+  padding-left: 0.5rem;
+  margin-left: -0.5rem;
+  /* 드래그 중 스크롤바 변화 방지 */
+  scrollbar-gutter: stable;
+}
+.taskItem {
+  position: relative;
+  border-radius: 0.5rem;
+  background-color: white;
+  border: 1px solid transparent;
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  overflow: visible;
+}
+.taskItem:hover {
+  background-color: #f9fafb;
+}
+.taskItemExpanded {
+  border-color: #e5e7eb;
+  padding-top: 0.25rem;
+}
+.taskHeader {
+  padding: 0.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.25rem;
+  position: relative;
+}
+.taskHeaderClickable { cursor: pointer; transition: background-color 0.2s; }
+.taskHeaderClickable:hover { background-color: transparent; }
+
+/* 드래그 핸들 */
+.dragHandle {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0;
+  cursor: grab;
+  color: #d1d5db;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid #f9fafb;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.03);
+  border-radius: 0.25rem;
+  opacity: 0;
+  transition: opacity 0.2s, color 0.2s;
+  z-index: 10;
+}
+
+.dragHandle:active {
+  cursor: grabbing;
+}
+
+.dragHandle:hover {
+  color: #6b7280;
+}
+
+.taskHeader:hover .dragHandle {
+  opacity: 1;
+}
+
+.todoCard:hover .dragHandle {
+  opacity: 1;
+}
+
+/* 작업 헤더 컨텐츠 */
+.taskHeaderContent {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+/* 위 행: 토글 + 제목 + 할일추가 */
+.taskHeaderTop { display: flex; align-items: center; gap: 0.25rem; }
+
+/* 아래 행: 프로그레스바 + 배지 + 삭제 */
+.taskHeaderBottom { display: flex; align-items: center; gap: 0.75rem; padding-left: 2rem; }
+.taskHeaderBottom .todoBadge { flex-shrink: 0;  }
+.taskHeaderBottom .deleteTaskBtn { margin-left: auto; flex-shrink: 0; }
+
+.taskTitleWrapper { display: inline-flex; align-items: flex-start; gap: 0.5rem; cursor: pointer; transition: all 0.2s; }
+.taskTitleWrapper:hover .taskTitle { color: #3b82f6; }
+.taskTitleWrapper:hover .editIcon { opacity: 1; }
+.taskTitle { font-size: 1rem; font-weight: 600; color: #111827; margin: 0; transition: color 0.2s; border-bottom: 2px solid transparent; word-break: break-word; line-height: 1.4; }
+.editTaskInput { font-size: 0.9rem; color: #111827; border: none; outline: none; background: transparent; caret-color: #3b82f6; padding: 0; width: 100%;  }
+.taskProgressContainer { display: flex; align-items: center; }
+
+.taskProgressCircle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.taskProgressPercent {
+  position: absolute;
+  font-size: 0.625rem;
+  font-weight: 700;
+  pointer-events: none;
+  transition: color 0.2s;
+  z-index: 10;
+}
+
+/* 작업 제목 섹션 */
+.taskTitleSection { display: flex; align-items: center; gap: 0.75rem; flex: 1; min-width: 0; }
+.taskStatusIcon { 
+  width: 1.5rem; 
+  height: 1.5rem; 
+  border-radius: 50%; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  flex-shrink: 0;
+}
+.taskStatusIcon.completed { background-color: #dcfce7; color: #22c55e; }
+.taskStatusIcon.inProgress { background-color: #eff6ff; color: #3b82f6; }
+.taskStatusIcon.pending { background-color: #f9fafb; }
+.todoStatusDot { 
+  width: 0.375rem; 
+  height: 0.375rem; 
+  border-radius: 50%; 
+  background-color: #d1d5db; 
+}
+
+/* 작업 통계 정보 */
+.taskStatsInfo { display: flex; align-items: center; gap:0.75rem; }
+.todoBadge { 
+  font-size: 0.75rem; 
+  font-weight: 600; 
+  color: #6b7280;
+  background-color: #f3f4f6;
+  padding: 0.125rem 0.5rem;
+  border-radius: 1rem;
+  border: 1px solid #e5e7eb;
+  min-width: 2rem;
+  text-align: center;
+  margin-left: 0.5rem;
+}
+
+.clickHint { color: #9ca3af; font-size: 0.75rem; }
+.addTodoBtn, .taskToggle { padding: 0.25rem; border-radius: 0.375rem; color: #9ca3af; transition: all 0.2s; }
+.addTodoBtn:hover, .taskToggle:hover { background-color: #f3f4f6; color: #9ca3af; }
+.deleteTaskBtn { padding: 0.25rem; border-radius: 0.375rem; color: #ef4444; transition: all 0.2s; background-color: transparent; border: none; cursor: pointer; }
+.deleteTaskBtn:hover { background-color: #fef2f2; color: #dc2626; }
+.todoList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0 0.5rem 0.5rem;
+  overflow: visible;
+ }
+
+/* 할일 그리드 레이아웃 */
+.todoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 1rem;
+}
+
+/* 할일 카드 */
+.todoCard {
+  position: relative;
+  background-color: transparent;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem 0.25rem 1rem;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  transition: background-color 0.2s;
+  overflow: visible;
+}
+
+.todoCard:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.todoCard .icon {
+  color: #9ca3af;
+  flex-shrink: 0;
+}
+
+/* DragOverlay 스타일 */
+.dragOverlayTask {
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.1);
+  cursor: grabbing;
+  border: 2px solid #3b82f6;
+  transform: scale(1.05);
+}
+
+.dragOverlayTodo {
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: grabbing;
+  border: 2px solid #3b82f6;
+  transform: scale(1.03);
+}
+
+.todoProgressCircle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.progressPercent {
+  position: absolute;
+  font-size: 0.625rem;
+  font-weight: 700;
+  pointer-events: none;
+  transition: color 0.2s;
+  z-index: 10;
+}
+
+.todoCardTitleWrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 0;
+  flex: 1;
+}
+
+.todoCardTitle:hover {
+  color: #3b82f6;
+}
+
+.todoCardTitleWrapper:has(.todoCardTitle:hover) .editIcon {
+  opacity: 1;
+}
+
+.todoCardTitle {
+  font-size: 0.938rem;
+  font-weight: 500;
+  color: #111827;
+  line-height: 1.5;
+  word-break: break-word;
+  transition: color 0.2s;
+}
+
+.todoCardTitle.completed {
+  text-decoration: line-through;
+  color: #9ca3af;
+}
+
+.todoCardProgress {
+  display: flex;
+  justify-content: flex-start;
+  flex-shrink: 0;
+}
+
+.todoCardDates {
+  display: flex;
+  gap: 0.25rem;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+.todoDateIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  color: #9ca3af;
+  background-color: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.todoDateIcon:hover:not(:disabled) {
+  background-color: #f3f4f6;
+  color: #6b7280;
+  border-color: #e5e7eb;
+}
+
+.todoDateIcon.hasDate {
+  color: #3b82f6;
+}
+
+.todoDateIcon.hasDate:hover {
+  background-color: #eff6ff;
+  border-color: #3b82f6;
+}
+
+.todoDateIcon.completed {
+  color: #22c55e;
+  cursor: default;
+}
+
+.todoDateIcon:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+/* 날짜 펼친 상태 */
+.todoDateExpanded {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  padding: 0.5rem;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+.todoDateRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.todoDateRowLabel {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #6b7280;
+  min-width: 3rem;
+}
+
+.todoDateRowValue {
+  font-size: 0.75rem;
+  color: #111827;
+  min-width: 3rem;
+}
+
+.todoDateEditBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.125rem;
+  border-radius: 0.25rem;
+  color: #9ca3af;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.todoDateEditBtn:hover {
+  color: #3b82f6;
+  background-color: #eff6ff;
+}
+
+.todoDateCollapseBtn {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.125rem;
+  border-radius: 0.25rem;
+  color: #9ca3af;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.todoDateCollapseBtn:hover {
+  color: #ef4444;
+  background-color: #fef2f2;
+}
+
+.todoCardDeleteBtn {
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  color: #9ca3af;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0;
+  /* box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05); */
+}
+
+.todoCard:hover .todoCardDeleteBtn {
+  opacity: 1;
+}
+
+.todoCardDeleteBtn:hover {
+  background-color: #fef2f2;
+  color: #ef4444;
+}
+
+/* 할일 추가 버튼 카드 */
+.addTodoCard {
+  background-color: #f9fafb;
+  border: 2px dashed transparent;
+  border-radius: 0.5rem;
+  padding: 0.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  color: #374151;
+  font-weight: 500;
+  width: 100%;
+}
+
+.addTodoCard:hover {
+  background-color: #eff6ff;
+  border-color: #3b82f6;
+  color: #3b82f6;
+}
+
+.addTodoIcon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.addTodoText {
+  font-size: 0.875rem;
+}
+
+/* 할일 추가 입력 카드 */
+.addTodoInputCard {
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.todoInputInCard {
+  width: 100%;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  outline: none;
+}
+
+.todoInputInCard:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.todoInputCardActions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+
+/* 반응형: 1024px 이하 - 2개 */
+@media (max-width: 1024px) {
+  .todoGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 반응형: 768px 이하 - 1개 */
+@media (max-width: 768px) {
+  .todoGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cancelTodoBtn, .saveTodoBtn { padding: 0.375rem 0.75rem; border-radius: 0.375rem; font-size: 0.75rem; font-weight: 500; transition: all 0.2s; }
+.cancelTodoBtn { background-color: white; color: #6b7280; border: 1px solid #d1d5db; }
+.saveTodoBtn { background-color: #3b82f6; color: white; border: 1px solid #3b82f6; }
+.saveTodoBtn:disabled { background-color: #9ca3af; border-color: #9ca3af; cursor: not-allowed; }
+.todoItem { display: flex; flex-direction: column; padding: 0.75rem 1rem;  transition: background-color 0.2s; gap: 0.5rem; }
+.todoItem:hover { background-color: #f3f4f6; }
+.todoItem:last-child { border-bottom: none; }
+.todoContent { display: flex; align-items: flex-start; gap: 0.75rem; width: 100%; min-width: 0; }
+.todoInfo { display: flex; align-items: center; gap: 0.5rem; min-width: 0; flex: 1; }
+.todoStatus { margin: 0.5rem; width: 0.5rem; height: 0.5rem; border-radius: 50%; flex-shrink: 0;}
+.todoStatus.todo { background-color: #d1d5db; }
+.todoStatus.in_progress { background-color: #3b82f6; }
+.todoStatus.completed { background-color: #22c55e; }
+.todoStatus.on_hold { background-color: #f59e0b; }
+.todoStatus.postponed { background-color: #ef4444; }
+.todoTitleWrapper { display: inline-flex; align-items: flex-start; gap: 0.25rem; cursor: pointer; transition: all 0.2s; }
+.todoTitleWrapper:hover .todoTitle { color: #3b82f6; }
+.todoTitleWrapper:hover .editIcon { opacity: 1; }
+.todoTitle { font-size: 0.875rem; color: #374151; transition: color 0.2s; border-bottom: 1px solid transparent; word-break: break-word; line-height: 1.4; }
+.todoTitle.completed { text-decoration: line-through; color: #9ca3af; }
+.editTodoInput { font-size: 0.875rem; color: #374151; caret-color:#3b82f6; border: none; outline: none; background: transparent;  padding: 0; margin: 0; min-width: 150px; 
+  flex: 1;}
+.editIcon { width: 0.75rem; height: 0.75rem; color: #9ca3af; opacity: 0; transition: opacity 0.2s; flex-shrink: 0; margin-top: 0.35rem; }
+.todoControls { display: flex; align-items: center; justify-content: space-between; gap: 1rem; width: 100%; margin-left: 0.75rem; padding-left:1.25rem; border-left: 0.125rem solid #e5e7eb; }
+.todoProgress { flex-shrink: 0; height: 20px; display: flex; align-items: center; }
+.todoActions { display: flex; gap: 0.5rem; opacity: 1; flex-wrap: wrap; }
+.todoActionBtn { display: flex; align-items: center; gap: 0.25rem; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.75rem; font-weight: 500; border: 1px solid transparent; background-color: transparent; color: #6b7280; white-space: nowrap; }
+.todoActionBtn:hover { background-color: white; border-color: #d1d5db; }
+
+/* 할일 제목 및 날짜 행 */
+.todoTitleRow { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 1rem; }
+.todoDateSection { display: flex; flex-direction: column; align-items: flex-end; flex-shrink: 0; gap: 0.25rem; }
+.todoDateDisplay { display: flex; align-items: center; gap: 0.25rem; cursor: pointer; padding: 0.25rem 0.5rem; border-radius: 0.25rem; transition: background-color 0.2s; }
+.todoDateDisplay:hover { background-color: #f3f4f6; }
+.todoDateText { font-size: 0.75rem; color: #4b5563; font-weight: 500; }
+.todoDatePlaceholder { font-size: 0.75rem; color: #9ca3af; }
+.todoDateIcon { width: 0.875rem; height: 0.875rem; color: #6b7280; }
+.todoDatePickerInline { font-size: 0.75rem; padding: 0.25rem 0.5rem; border: 1px solid #d1d5db; border-radius: 0.25rem; min-width: 100px; }
+.todoDateInfo { display: flex; gap: 0.25rem; }
+.todoDateLabel {
+  font-size: 0.65rem;
+  color: #6b7280;
+  background-color: #f3f4f6;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.todoDateLabel.clickable { cursor: pointer; transition: all 0.2s; }
+.todoDateLabel.clickable:hover { background-color: #e5e7eb; color: #374151; transform: translateY(-1px); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); }
+
+.dateIcon {
+  width: 0.75rem;
+  height: 0.75rem;
+  flex-shrink: 0;
+}
+
+/* 할일 날짜 표시 (기존, 삭제 예정) */
+.todoMeta { display: flex; align-items: center; gap: 0.5rem; }
+.todoDate { font-size: 0.75rem; color: #4b5563; background-color: #e5e7eb; padding: 0.25rem 0.5rem; border-radius: 0.25rem; }
+.todoDateTbd { font-size: 0.75rem; color: #9ca3af; }
+
+.loading, .error { text-align: center; padding: 3rem; font-size: 1.2rem; }
+.loading { color: #6b7280; }
+.error { color: #ef4444; }
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .taskMeta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .taskStatsInfo {
+    align-self: flex-start; 
+  }
+  
+  
+  .todoControls { 
+    flex-direction: column; 
+    gap: 0.75rem; 
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  
+  .todoInputRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  
+  .todoActions { 
+    width: 100%; 
+    justify-content: flex-start; 
+  }
+  
+  .todoProgress { 
+    width: 100%; 
+  }
+}
+
+@media (max-width: 480px) {
+  .todoActionBtn {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.4rem;
+  }
+
+}
+
+/* 로딩 오버레이 */
+.loadingOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.loadingSpinner {
+  background-color: white;
+  padding: 2rem 3rem;
+  border-radius: 0.75rem;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.loadingSpinner p {
+  margin: 1rem 0 0 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.loadingSubtext {
+  font-size: 0.875rem !important;
+  font-weight: 400 !important;
+  color: #6b7280 !important;
+  margin-top: 0.5rem !important;
+}
+
+.spinner {
+  border: 4px solid #f3f4f6;
+  border-top: 4px solid #3b82f6;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 이슈 버튼 */
+.issueButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  background-color: white;
+  /* border: 1px solid #d1d5db; */
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.issueButton:hover {
+  background-color: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.issueButtonActive {
+  background-color: #eff6ff;
+  color: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.issueCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding: 0 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #ef4444;
+  background-color: #fee2e2;
+  border-radius: 0.75rem;
+  line-height: 1;
+}
+
+.issueButtonActive .issueCount {
+  color: #3b82f6;
+  background-color: #dbeafe;
+}
+
+/* 이슈 패널 */
+.issuePanel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 28rem;
+  height: 100vh;
+  background-color: white;
+  box-shadow: -4px 0 6px -1px rgba(0, 0, 0, 0.1);
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+.issuePanelOpen {
+  transform: translateX(0);
+}
+
+.issuePanelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.issuePanelTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #111827;
+}
+
+.issuePanelTitle h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.issueCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #3b82f6;
+  background-color: #eff6ff;
+  border-radius: 1rem;
+}
+
+.issuePanelCloseButton {
+  padding: 0.5rem;
+  color: #6b7280;
+  background-color: transparent;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.issuePanelCloseButton:hover {
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+.issuePanelContent {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+
+.addIssueButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #3b82f6;
+  background-color: #eff6ff;
+  border: 1px dashed #3b82f6;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 1.5rem;
+}
+
+.addIssueButton:hover {
+  background-color: #dbeafe;
+}
+
+.issueForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 1.5rem;
+}
+
+.issueFormInput,
+.issueFormTextarea,
+.issueFormSelect {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  color: #111827;
+  background-color: white;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  transition: border-color 0.2s;
+}
+
+.issueFormInput:focus,
+.issueFormTextarea:focus,
+.issueFormSelect:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.issueFormTextarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.issueFormRow {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.issueFormActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.issueCancelButton,
+.issueSaveButton {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.issueCancelButton {
+  color: #374151;
+  background-color: white;
+  border: 1px solid #d1d5db;
+}
+
+.issueCancelButton:hover {
+  background-color: #f9fafb;
+}
+
+.issueSaveButton {
+  color: white;
+  background-color: #3b82f6;
+  border: 1px solid #3b82f6;
+}
+
+.issueSaveButton:hover:not(:disabled) {
+  background-color: #2563eb;
+}
+
+.issueSaveButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.issuesList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.emptyIssues {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  color: #9ca3af;
+}
+
+.emptyIssues p {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+}
+
+.issueItem {
+  padding: 1rem;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  transition: box-shadow 0.2s;
+}
+
+.issueItem:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.issueItemHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.issueItemTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.issueItemTitle span {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.issuePriority {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.issuePriorityLow {
+  background-color: #22c55e;
+}
+
+.issuePriorityMedium {
+  background-color: #f59e0b;
+}
+
+.issuePriorityHigh {
+  background-color: #ef4444;
+}
+
+.issuePriorityCritical {
+  background-color: #dc2626;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.issueDeleteButton {
+  padding: 0.25rem;
+  color: #9ca3af;
+  background-color: transparent;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.issueDeleteButton:hover {
+  color: #ef4444;
+  background-color: #fef2f2;
+}
+
+.issueDescription {
+  font-size: 0.813rem;
+  color: #6b7280;
+  margin: 0.5rem 0;
+  line-height: 1.5;
+}
+
+.issueItemFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #f3f4f6;
+}
+
+.issueStatusSelect {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.issueStatusOpen {
+  color: #3b82f6;
+  background-color: #eff6ff;
+  border: 1px solid #3b82f6;
+}
+
+.issueStatusInprogress {
+  color: #f59e0b;
+  background-color: #fffbeb;
+  border: 1px solid #f59e0b;
+}
+
+.issueStatusResolved {
+  color: #22c55e;
+  background-color: #f0fdf4;
+  border: 1px solid #22c55e;
+}
+
+.issueStatusClosed {
+  color: #6b7280;
+  background-color: #f9fafb;
+  border: 1px solid #d1d5db;
+}
+
+.issueDate {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.issuePanelOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
+
+/* Floating 모드 토글 버튼 */
+.floatingToggle {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  display: flex;
+  gap: 0.25rem;
+  background-color: #f3f4f6;
+  padding: 0.25rem;
+  border-radius: 3rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.floatingButton {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 3rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  background-color: transparent;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.floatingButton:hover {
+  color: #374151;
+}
+
+.floatingButtonActive {
+  background-color: white;
+  color: #3b82f6;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.buttonIcon {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* 요약모드 스타일 */
+.summaryMode {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-shrink: 1;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.summaryTasksList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.summaryTaskItem {
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  transition: all 0.2s;
+}
+
+.summaryTaskItem:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.summaryTaskHeader {
+  margin-bottom: 0.75rem;
+}
+
+.summaryTaskTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.summaryTaskProgressCircle {
+  flex-shrink: 0;
+}
+
+.summaryTaskTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  flex: 1;
+}
+
+.summaryTaskProgress {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #3b82f6;
+  background-color: #eff6ff;
+  padding: 0.25rem 0.625rem;
+  border-radius: 1rem;
+  flex-shrink: 0;
+}
+
+.summaryTodosList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.summaryTodoItem {
+  background-color: white;
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #e5e7eb;
+  transition: background-color 0.2s;
+}
+
+.summaryTodoItem:hover {
+  background-color: #f9fafb;
+}
+
+.summaryTodoTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.summaryTodoLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.summaryTodoStatus {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.summaryTodoStatus.todo {
+  background-color: #d1d5db;
+}
+
+.summaryTodoStatus.in_progress {
+  background-color: #3b82f6;
+}
+
+.summaryTodoStatus.completed {
+  background-color: #22c55e;
+}
+
+.summaryTodoStatus.on_hold {
+  background-color: #f59e0b;
+}
+
+.summaryTodoIcon {
+  color: #9ca3af;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+.summaryTodoTitle {
+  font-size: 0.875rem;
+  color: #374151;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.summaryTodoProgress {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #6b7280;
+  background-color: #f3f4f6;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.75rem;
+  flex-shrink: 0;
+}

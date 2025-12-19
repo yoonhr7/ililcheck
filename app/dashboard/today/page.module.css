@@ -1,0 +1,1061 @@
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #f9fafb;
+  position: relative;
+}
+.card { background-color: white; border-radius: 0.5rem; border: 1px solid #e5e7eb; padding: 1.5rem; display: flex; flex-direction: column; flex: 1; min-height: 0; overflow: hidden; }
+
+/* 헤더 */
+.headerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 0 0 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem 0.5rem 0 0;
+  flex-shrink: 0;
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.titleSection {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.projectColorBox {
+  width: 0.25rem;
+  border-radius: 0.25rem;
+  height: 1.25rem;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.category{
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.25rem;
+  background-color: #3b82f6;
+  color: #ffffff;
+}
+
+.date {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.statsChips {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.statChip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.625rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background-color: #eff6ff;
+  color: #3b82f6;
+  border: 1px solid #3b82f6;
+  white-space: nowrap;
+}
+
+/* 모드 토글 버튼 */
+.modeToggle {
+  display: flex;
+  gap: 0.25rem;
+  background-color: #f3f4f6;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+}
+
+.modeButton {
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  background-color: transparent;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.modeButton:hover {
+  color: #374151;
+}
+
+.modeButtonActive {
+  background-color: white;
+  color: #3b82f6;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* 콘텐츠 영역 */
+.content {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.contentInner {
+  max-width: 64rem;
+  margin: 0 auto;
+  width: 100%;
+  padding: 1.5rem;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 진행률 섹션 */
+.progressSection {
+  background: white;
+  border-radius: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.progressInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.progressTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.progressText {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.progressBarWrapper {
+  width: 100%;
+}
+
+/* 필터 버튼 */
+.filterButtons {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+.filterButton {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid #d1d5db;
+  background: white;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filterButton:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+}
+
+/* 각 필터별 활성화 색상 */
+.filterButton.active:not(.filterTodo):not(.filterInProgress):not(
+    .filterCompleted
+  ):not(.filterOnHold) {
+  color: #3b82f6;
+  border-color: #3b82f6;
+  background-color: #eff6ff;
+}
+
+.filterTodo.active {
+  color: #6b7280;
+  border-color: #6b7280;
+  background-color: #f3f4f6;
+}
+
+.filterInProgress.active {
+  color: #22c55e;
+  border-color: #22c55e;
+  background-color: #f0fdf4;
+}
+
+.filterCompleted.active {
+  color: #3b82f6;
+  border-color: #3b82f6;
+  background-color: #eff6ff;
+}
+
+.filterOnHold.active {
+  color: #f59e0b;
+border-color: #f59e0b;
+  background-color: #fffbeb;
+}
+
+/* 프로젝트 컨테이너 */
+.projectsContainer {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-right: 0.5rem;
+}
+.projectCard {
+  background: white;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.projectHeader {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  align-items: center;
+}
+
+.projectProgressCircle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.projectProgressPercent {
+  position: absolute;
+  font-size: 0.625rem;
+  font-weight: 700;
+  pointer-events: none;
+  transition: color 0.2s;
+  z-index: 10;
+}
+
+.projectHeaderContents {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.projectHeader:hover {
+  background: #f9fafb;
+}
+
+.projectInfoWrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.projectInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.projectChips {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-left: 0.5rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background-color: #f3f4f6;
+  color: #6b7280;
+  border: 1px solid #e5e7eb;
+  white-space: nowrap;
+  min-width: 2rem;
+  text-align: center;
+}
+
+.projectProgressInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.projectProgressText {
+  font-size: 0.75rem;
+  color: #6b7280;
+  font-weight: 500;
+  white-space: nowrap;
+  min-width: 100px;
+}
+
+.projectProgressBarWrapper {
+  flex: 1;
+  max-width: 200px;
+}
+
+.projectName {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.todoCount {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.expandButton {
+  padding: 0.25rem;
+  border: none;
+  background: transparent;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+/* 작업 목록 */
+.tasksList {
+  padding: 0 0.5rem 0.5rem;
+}
+
+.taskSection {
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.taskHeader {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  align-items: center;
+}
+
+.taskProgressCircle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.taskProgressPercent {
+  position: absolute;
+  font-size: 0.625rem;
+  font-weight: 700;
+  pointer-events: none;
+  transition: color 0.2s;
+  z-index: 10;
+}
+
+.taskHeader:hover {
+  background-color: #f9fafb;
+  border-radius: 0.375rem;
+}
+
+.taskExpandButton {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 0;
+}
+
+.taskHeaderContent {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.taskTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.taskTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.taskStats {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.taskCount {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.taskProgressText {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.taskProgressBarWrapper {
+  flex-shrink: 0;
+  width: 200px;
+}
+
+/* 할일 목록 */
+.todosList {
+  padding: 0 0.5rem  0.5rem  0.5rem;
+}
+
+/* 할일이 없는 경우 */
+.emptyTaskTodos {
+  padding: 1rem;
+  color: #9ca3af;
+  font-size: 0.8125rem;
+  text-align: center;
+}
+
+.todoItem {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  transition: background-color 0.2s;
+  gap: 0.75rem;
+}
+
+.todoItem:last-child {
+  border-bottom: none;
+}
+
+.todoItem:hover {
+  background: #f9fafb;
+}
+
+.todoContent {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  width: 100%;
+  min-width: 0;
+}
+
+.todoInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.todoProgressCircle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.progressPercent {
+  position: absolute;
+  font-size: 0.625rem;
+  font-weight: 700;
+  pointer-events: none;
+  transition: color 0.2s;
+  z-index: 10;
+}
+
+/* 할일 제목 및 날짜 행 */
+.todoTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 1rem;
+}
+
+.todoTitleWrapper {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex: 1;
+  min-width: 0;
+}
+
+.todoTitleWrapper:hover .todoTitle {
+  color: #3b82f6;
+}
+
+.todoTitleWrapper:hover .editIcon {
+  opacity: 1;
+}
+
+.todoTitle {
+  font-size: 0.875rem;
+  color: #374151;
+  transition: color 0.2s;
+  border-bottom: 1px solid transparent;
+  word-break: break-word;
+  line-height: 1.4;
+}
+
+.taskTitle {
+  font-size: 0.875rem; 
+  font-weight: 400;
+}
+
+.editTodoInput {
+  font-size: 0.875rem;
+  color: #374151;
+  border: none;
+  outline: none;
+  background: transparent;
+  border-bottom: 1px solid #3b82f6;
+  padding: 0;
+  margin: 0;
+  min-width: 150px;
+  flex: 1;
+}
+
+.editIcon {
+  width: 0.75rem;
+  height: 0.75rem;
+  color: #9ca3af;
+  opacity: 0;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+/* 할일 날짜 선택 */
+.todoDateSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+  gap: 0.25rem;
+}
+
+.todoDateDisplay {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s;
+}
+
+.todoDateDisplay:hover {
+  background-color: #f3f4f6;
+}
+
+.todoDateInfo {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.todoDateLabel {
+  font-size: 0.65rem;
+  color: #6b7280;
+  background-color: #f3f4f6;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+}
+
+.todoDateLabel.clickable {
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.todoDateLabel.clickable:hover {
+  background-color: #e5e7eb;
+  color: #374151;
+  transform: translateY(-1px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.todoDateText {
+  font-size: 0.75rem;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.todoDatePlaceholder {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.todoDateIcon {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: #6b7280;
+}
+
+.todoDatePickerInline {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.25rem;
+  min-width: 100px;
+}
+
+/* 할일 컨트롤 */
+.todoControls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+}
+
+.todoProgress {
+  flex-shrink: 0;
+  height: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.todoActions {
+  display: flex;
+  gap: 0.5rem;
+  opacity: 1;
+  flex-wrap: wrap;
+}
+
+.todoActionBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+  background-color: transparent;
+  color: #6b7280;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.todoActionBtn:hover {
+  background-color: white;
+  border-color: #d1d5db;
+}
+
+.deleteBtn {
+  color: #ef4444;
+}
+
+.deleteBtn:hover {
+  background-color: #fef2f2;
+  border-color: #ef4444;
+}
+
+/* 빈 상태 */
+.emptyState {
+  text-align: center;
+  padding: 3rem;
+  color: #6b7280;
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: #6b7280;
+}
+
+/* 요약모드 스타일 */
+.summaryMode {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.summaryProjectCard {
+  background: white;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  display: flex;
+}
+
+.summaryProjectColorBar {
+  width: 0.5rem;
+  flex-shrink: 0;
+}
+
+.summaryProjectContent {
+  flex: 1;
+  padding: 1.5rem;
+}
+
+.summaryProjectHeader {
+  margin-bottom: 1.5rem;
+}
+
+.summaryProjectInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.summaryProjectName {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.summaryProjectBadge {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.summaryTasksList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.summaryTaskItem {
+  border-left: 0.125rem solid #e5e7eb;
+  padding-left: 1rem;
+}
+
+.summaryTaskHeader {
+  margin-bottom: 0.75rem;
+}
+
+.summaryTaskTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.summaryTaskTitle {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.summaryTaskProgress {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6b7280;
+  white-space: nowrap;
+}
+
+.summaryTodosList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.summaryTodoItem {
+  padding: 0.5rem 0;
+}
+
+.summaryTodoTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.summaryTodoLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.summaryTodoStatus {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.summaryTodoIcon {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  flex-shrink: 0;
+}
+
+.summaryTodoTitle {
+  font-size: 0.875rem;
+  color: #374151;
+  word-break: break-word;
+}
+
+.summaryTodoProgress {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #9ca3af;
+  white-space: nowrap;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .headerContent {
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0.75rem 1rem;
+  }
+
+  .headerRight {
+    margin-top: 0.25rem;
+  }
+
+  .content {
+    padding: 0 1rem 1rem;
+  }
+
+  .title {
+    font-size: 1.125rem;
+  }
+
+  .date {
+    font-size: 0.8125rem;
+  }
+
+  .headerStats {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .statChip {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .progressSection {
+    padding: 1rem;
+  }
+
+  .progressInfo {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .filterButtons {
+    justify-content: center;
+  }
+
+  .filterButton {
+    font-size: 0.8125rem;
+    padding: 0.375rem 0.75rem;
+  }
+
+  .todoTitleRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .todoDateSection {
+    align-self: flex-end;
+  }
+
+  .todoControls {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .todoActions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .todoProgress {
+    width: 100%;
+  }
+
+  .projectProgressInfo {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .projectProgressText {
+    font-size: 0.75rem;
+    min-width: auto;
+  }
+
+  .projectProgressBarWrapper {
+    width: 100%;
+    max-width: none;
+  }
+
+  .projectMeta {
+    padding-left: 1.75rem;
+  }
+
+  .chip {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .modeToggle {
+    width: 100%;
+    order: 3;
+  }
+
+  .modeButton {
+    flex: 1;
+    text-align: center;
+  }
+
+  .summaryProjectContent {
+    padding: 1rem;
+  }
+
+  .summaryTaskItem {
+    padding-left: 0.75rem;
+  }
+
+  .summaryTodoTitleRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .summaryTodoProgress {
+    align-self: flex-end;
+  }
+
+  .floatingButton {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .todoActionBtn {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.4rem;
+  }
+
+  .projectProgressText {
+    font-size: 0.65rem;
+    min-width: auto;
+  }
+}
+
+/* Floating 토글 버튼 */
+.floatingToggle {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  display: flex;
+  gap: 0.25rem;
+  background-color: #f3f4f6;
+  padding: 0.25rem;
+  border-radius: 3rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.floatingButton {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 3rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  background-color: transparent;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.floatingButton:hover {
+  color: #374151;
+}
+
+.floatingButtonActive {
+  background-color: white;
+  color: #3b82f6;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.buttonIcon {
+  width: 1rem;
+  height: 1rem;
+}
