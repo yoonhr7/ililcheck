@@ -24,6 +24,21 @@ import {
 // Tasks are now managed directly under projects
 
 /**
+ * 사용자의 모든 작업 가져오기 (모든 프로젝트)
+ */
+export async function fetchTasks(): Promise<Task[]> {
+  const projects = await fetchProjectsFromSupabase();
+  const allTasks: Task[] = [];
+
+  for (const project of projects) {
+    const tasks = await fetchTasksByProjectFromSupabase(project.id);
+    allTasks.push(...tasks);
+  }
+
+  return allTasks;
+}
+
+/**
  * 사용자의 특정 프로젝트 작업 가져오기
  */
 export async function fetchTasksByProject(projectId: string): Promise<Task[]> {
