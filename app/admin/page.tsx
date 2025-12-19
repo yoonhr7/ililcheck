@@ -93,8 +93,8 @@ export default function AdminPage() {
     if (!confirmed) return;
 
     const success = currentRole === 'manager'
-      ? await revokeAdminRole(uid)
-      : await grantManagerRole(uid);
+      ? await revokeAdminRole(id)
+      : await grantManagerRole(id);
 
     if (success) {
       // 사용자 목록 업데이트
@@ -131,7 +131,7 @@ export default function AdminPage() {
 
     if (!doubleConfirmed) return;
 
-    const { success, error } = await deleteUser(uid);
+    const { success, error } = await deleteUser(id);
 
     if (success) {
       setUsers(users.filter(u => u.uid !== uid));
