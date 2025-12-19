@@ -134,7 +134,7 @@ export default function AdminPage() {
     const { success, error } = await deleteUser(id);
 
     if (success) {
-      setUsers(users.filter(u => u.uid !== uid));
+      setUsers(users.filter(u => u.id !== id));
       alert("계정이 삭제되었습니다.");
     } else {
       alert(`계정 삭제 실패: ${error}`);
