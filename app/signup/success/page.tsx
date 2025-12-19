@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
 import { Database } from "@/lib/database.types";
@@ -9,7 +9,6 @@ import styles from "./page.module.css";
 
 export default function SignupSuccessPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [userInfo, setUserInfo] = useState<{
     userId: string;
     username: string;
