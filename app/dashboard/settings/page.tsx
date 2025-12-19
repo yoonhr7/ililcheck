@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { getCurrentUser, logout } from '@/lib/auth';
-import { updateUserProfile } from '@/lib/supabase-api';
-import { supabase } from '@/lib/supabase';
-import styles from './page.module.css';
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { getCurrentUser, logout } from "@/lib/auth";
+import { updateUserProfile } from "@/lib/supabase-api";
+import { supabase } from "@/lib/supabase";
+import styles from "./page.module.css";
 
 interface UserProfile {
   userId: string;
@@ -21,12 +21,12 @@ export default function SettingsPage() {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   // 폼 상태
-  const [displayName, setDisplayName] = useState('');
-  const [email, setEmail] = useState('');
+  const [displayName, setDisplayName] = useState("");
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     loadUserProfile();
@@ -36,37 +36,37 @@ export default function SettingsPage() {
     try {
       const user = await getCurrentUser();
       if (!user) {
-        router.push('/login');
+        router.push("/login");
         return;
       }
 
       const { data, error } = await supabase
-        .from('users')
-        .select('*')
-        .eq('user_id', user.id)
+        .from("users")
+        .select("*")
+        .eq("user_id", user.id)
         .single();
 
       if (error || !data) {
-        console.error('프로필 로드 실패:', error);
-        setError('프로필을 불러올 수 없습니다.');
+        console.error("프로필 로드 실패:", error);
+        setError("프로필을 불러올 수 없습니다.");
         return;
       }
 
       const userProfile: UserProfile = {
         userId: data.user_id,
-        username: data.username || '',
-        email: data.email || user.email || '',
-        displayName: data.display_name || '',
-        provider: data.provider || 'email',
-        createdAt: new Date(data.created_at).toLocaleDateString('ko-KR'),
+        username: data.username || "",
+        email: data.email || user.email || "",
+        displayName: data.display_name || "",
+        provider: data.provider || "email",
+        createdAt: new Date(data.created_at).toLocaleDateString("ko-KR"),
       };
 
       setProfile(userProfile);
       setDisplayName(userProfile.displayName);
       setEmail(userProfile.email);
     } catch (error) {
-      console.error('Error loading profile:', error);
-      setError('프로필을 불러오는 중 오류가 발생했습니다.');
+      console.error("Error loading profile:", error);
+      setError("프로필을 불러오는 중 오류가 발생했습니다.");
     } finally {
       setLoading(false);
     }
@@ -74,11 +74,11 @@ export default function SettingsPage() {
 
   async function handleSave(e: React.FormEvent) {
     e.preventDefault();
-    setError('');
-    setSuccess('');
+    setError("");
+    setSuccess("");
 
     if (!displayName.trim()) {
-      setError('이름을 입력해주세요.');
+      setError("이름을 입력해주세요.");
       return;
     }
 
@@ -91,14 +91,14 @@ export default function SettingsPage() {
       });
 
       if (updated) {
-        setSuccess('프로필이 업데이트되었습니다.');
+        setSuccess("프로필이 업데이트되었습니다.");
         await loadUserProfile();
       } else {
-        setError('프로필 업데이트에 실패했습니다.');
+        setError("프로필 업데이트에 실패했습니다.");
       }
     } catch (error) {
-      console.error('프로필 저장 오류:', error);
-      setError('프로필 저장 중 오류가 발생했습니다.');
+      console.error("프로필 저장 오류:", error);
+      setError("프로필 저장 중 오류가 발생했습니다.");
     } finally {
       setSaving(false);
     }
@@ -107,10 +107,10 @@ export default function SettingsPage() {
   async function handleLogout() {
     const { error } = await logout();
     if (error) {
-      setError('로그아웃에 실패했습니다.');
+      setError("로그아웃에 실패했습니다.");
       return;
     }
-    router.push('/login');
+    router.push("/login");
   }
 
   if (loading) {
@@ -134,7 +134,13 @@ export default function SettingsPage() {
       <div className={styles.header}>
         <button onClick={() => router.back()} className={styles.backButton}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path
+              d="M19 12H5M5 12L12 19M5 12L12 5"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
           뒤로가기
         </button>
@@ -159,7 +165,7 @@ export default function SettingsPage() {
             <div className={styles.infoItem}>
               <span className={styles.infoLabel}>로그인 방법</span>
               <span className={styles.infoValue}>
-                {profile.provider === 'google' ? 'Google' : '이메일'}
+                {profile.provider === "google" ? "Google" : "이메일"}
               </span>
             </div>
           </div>
@@ -173,7 +179,7 @@ export default function SettingsPage() {
             <input
               type="text"
               value={displayName}
-              onChange={(e) => setDisplayName(e.target.value)}
+              onChange={e => setDisplayName(e.target.value)}
               className={styles.input}
               placeholder="홍길동"
               required
@@ -185,28 +191,21 @@ export default function SettingsPage() {
             <input
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={e => setEmail(e.target.value)}
               className={styles.input}
               placeholder="email@example.com"
               required
             />
           </div>
 
-          <button
-            type="submit"
-            className={styles.saveButton}
-            disabled={saving}
-          >
-            {saving ? '저장 중...' : '변경사항 저장'}
+          <button type="submit" className={styles.saveButton} disabled={saving}>
+            {saving ? "저장 중..." : "변경사항 저장"}
           </button>
         </form>
 
         <div className={styles.section}>
           <h2 className={styles.sectionTitle}>계정 관리</h2>
-          <button
-            onClick={handleLogout}
-            className={styles.logoutButton}
-          >
+          <button onClick={handleLogout} className={styles.logoutButton}>
             로그아웃
           </button>
         </div>
