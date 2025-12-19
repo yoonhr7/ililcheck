@@ -64,7 +64,7 @@ export default function AdminPage() {
       const usersWithRoles = await Promise.all(
         allUsers.map(async (user) => ({
           ...user,
-          role: await getUserRole(user.uid),
+          role: await getUserRole(user.id),
         }))
       );
 
@@ -201,12 +201,12 @@ export default function AdminPage() {
           </thead>
           <tbody>
             {users.map((user) => {
-              const isSelf = user.uid === currentUser?.uid;
+              const isSelf = user.id === currentUser?.id;
               const userRole = user.role || 'user';
 
               return (
-                <tr key={user.uid}>
-                  <td className={styles.uid}>{user.uid}</td>
+                <tr key={user.id}>
+                  <td className={styles.uid}>{user.id}</td>
                   <td>{user.userId || '-'}</td>
                   <td>{user.username || '-'}</td>
                   <td>{user.email || '-'}</td>
@@ -231,7 +231,7 @@ export default function AdminPage() {
                     {currentUserRole === 'master' && !isSelf && userRole !== 'master' ? (
                       <div className={styles.actionButtons}>
                         <button
-                          onClick={() => handleToggleRole(user.uid, userRole)}
+                          onClick={() => handleToggleRole(user.id, userRole)}
                           className={
                             userRole === 'manager' ? styles.btnRevoke : styles.btnGrant
                           }
@@ -239,7 +239,7 @@ export default function AdminPage() {
                           {userRole === 'manager' ? '권한 제거' : 'Manager 지정'}
                         </button>
                         <button
-                          onClick={() => handleDeleteUser(user.uid)}
+                          onClick={() => handleDeleteUser(user.id)}
                           className={styles.btnDelete}
                         >
                           삭제

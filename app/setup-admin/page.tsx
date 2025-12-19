@@ -24,7 +24,7 @@ export default function SetupAdminPage() {
       setCurrentUser(user);
 
       // 현재 관리자 권한 확인
-      const adminStatus = await checkAdminStatus(user.uid);
+      const adminStatus = await checkAdminStatus(user.id);
       setIsAdmin(adminStatus);
       setLoading(false);
     });
@@ -41,7 +41,7 @@ export default function SetupAdminPage() {
     setGranting(true);
     setMessage('');
 
-    const success = await grantAdminAccess(currentUser.uid);
+    const success = await grantAdminAccess(currentUser.id);
 
     if (success) {
       setMessage('✅ 관리자 권한이 부여되었습니다!');
