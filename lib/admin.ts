@@ -4,7 +4,7 @@ import { supabase } from './supabase';
 export type UserRole = 'master' | 'manager' | 'user';
 
 interface UserInfoDisplay {
-  uid: string;
+  id: string;
   userId: string;
   username: string;
   email: string | null;
@@ -31,7 +31,7 @@ export async function fetchAllUsers(): Promise<UserInfoDisplay[]> {
     }
 
     return (users || []).map((user: any) => ({
-      uid: user.user_id,
+      id: user.user_id,
       userId: user.username || '-',
       username: user.display_name || '-',
       email: user.email || null,
