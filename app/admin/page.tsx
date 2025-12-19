@@ -44,11 +44,11 @@ export default function AdminPage() {
       setCurrentUser(user);
 
       // 현재 사용자의 역할 확인
-      const role = await getUserRole(user.uid);
+      const role = await getUserRole(user.id);
       setCurrentUserRole(role);
 
       // 관리자 권한 확인
-      const adminStatus = await checkAdminStatus(user.uid);
+      const adminStatus = await checkAdminStatus(user.id);
       setIsAdmin(adminStatus);
 
       if (!adminStatus) {

@@ -2,9 +2,14 @@
 /node_modules
 /.pnp
 .pnp.js
+/package-lock.json
+/yarn.lock
+/pnpm-lock.yaml
 
 # testing
 /coverage
+*.test.ts
+*.spec.ts
 
 # next.js
 /.next/
@@ -12,19 +17,37 @@
 
 # production
 /build
+/dist
 
 # misc
 .DS_Store
 *.pem
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 
 # debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# local env files
-.env*.local
+# environment variables (중요!)
 .env
+.env*.local
+.env.development
+.env.production
+.env.test
+
+# ⚠️ 절대 커밋하면 안 되는 파일들 ⚠️
+# Supabase API keys, secrets 등이 포함됨
+*.key
+*.secret
+secrets/
+credentials/
 
 # vercel
 .vercel
@@ -32,3 +55,46 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# SQL 스크립트 (민감한 데이터 포함 가능)
+# supabase-setup.sql
+# fix-anon-access.sql
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.vs/
+
+# Editor backups
+*.bak
+*.tmp
+*.temp
+
+# Cache
+.cache/
+.parcel-cache/
+.npm/
+.eslintcache
+.stylelintcache

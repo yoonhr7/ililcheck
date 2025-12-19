@@ -141,3 +141,26 @@ export async function revokeAdminAccess(uid: string): Promise<boolean> {
 export async function isUserAdmin(uid: string): Promise<boolean> {
   return checkAdminStatus(uid);
 }
+
+/**
+ * 사용자 삭제 (Master만 가능)
+ */
+export async function deleteUser(uid: string): Promise<{ success: boolean; error?: string }> {
+  try {
+    // users 테이블에서 삭제 (CASCADE로 auth.users도 삭제됨)
+    const { error } = await supabase
+      .from('users')
+      .delete()
+      .eq('user_id', uid);
+
+    if (error) {
+      console.error('사용자 삭제 실패:', error);
+      return { success: false, error: error.message };
+    }
+
+    return { success: true };
+  } catch (error: any) {
+    console.error('사용자 삭제 실패:', error);
+    return { success: false, error: error.message };
+  }
+}
