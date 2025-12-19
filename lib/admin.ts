@@ -53,14 +53,14 @@ export async function fetchAllUsers(): Promise<UserInfoDisplay[]> {
 /**
  * 사용자의 역할 가져오기
  */
-export async function getUserRole(uid: string): Promise<UserRole> {
+export async function getUserRole(id: string): Promise<UserRole> {
   try {
     // users 테이블에서 role 확인
     const { data: user, error } = await supabase
       .from("users")
       .select("role, email")
-      .eq("user_id", uid)
-      .single();
+      .eq("user_id", id)
+      .single<Database["public"]["Tables"]["users"]["Row"]>();
 
     if (error || !user) {
       return "user";
@@ -82,20 +82,20 @@ export async function getUserRole(uid: string): Promise<UserRole> {
 /**
  * 관리자 권한 확인 (Master 또는 Manager)
  */
-export async function checkAdminStatus(uid: string): Promise<boolean> {
-  const role = await getUserRole(uid);
+export async function checkAdminStatus(id: string): Promise<boolean> {
+  const role = await getUserRole(id);
   return role === "master" || role === "manager";
 }
 
 /**
  * Manager 권한 부여 (Master만 가능)
  */
-export async function grantManagerRole(uid: string): Promise<boolean> {
+export async function grantManagerRole(id: string): Promise<boolean> {
   try {
     const { error } = await supabase
       .from("users")
       .update({ role: "manager" })
-      .eq("user_id", uid);
+      .eq("user_id", id);
 
     if (error) {
       console.error("Manager 권한 부여 실패:", error);
@@ -112,12 +112,12 @@ export async function grantManagerRole(uid: string): Promise<boolean> {
 /**
  * 권한 제거 (일반 사용자로 변경)
  */
-export async function revokeAdminRole(uid: string): Promise<boolean> {
+export async function revokeAdminRole(id: string): Promise<boolean> {
   try {
     const { error } = await supabase
       .from("users")
       .update({ role: "user" })
-      .eq("user_id", uid);
+      .eq("user_id", id);
 
     if (error) {
       console.error("권한 제거 실패:", error);
@@ -134,27 +134,27 @@ export async function revokeAdminRole(uid: string): Promise<boolean> {
 /**
  * 레거시 함수 호환성 유지
  */
-export async function grantAdminAccess(uid: string): Promise<boolean> {
-  return grantManagerRole(uid);
+export async function grantAdminAccess(id: string): Promise<boolean> {
+  return grantManagerRole(id);
 }
 
-export async function revokeAdminAccess(uid: string): Promise<boolean> {
-  return revokeAdminRole(uid);
+export async function revokeAdminAccess(id: string): Promise<boolean> {
+  return revokeAdminRole(id);
 }
 
-export async function isUserAdmin(uid: string): Promise<boolean> {
-  return checkAdminStatus(uid);
+export async function isUserAdmin(id: string): Promise<boolean> {
+  return checkAdminStatus(id);
 }
 
 /**
  * 사용자 삭제 (Master만 가능)
  */
 export async function deleteUser(
-  uid: string
+  id: string
 ): Promise<{ success: boolean; error?: string }> {
   try {
     // users 테이블에서 삭제 (CASCADE로 auth.users도 삭제됨)
-    const { error } = await supabase.from("users").delete().eq("user_id", uid);
+    const { error } = await supabase.from("users").delete().eq("user_id", id);
 
     if (error) {
       console.error("사용자 삭제 실패:", error);
