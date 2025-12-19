@@ -15,7 +15,7 @@ import { useEffect, useState } from 'react';
 import styles from './page.module.css';
 
 interface UserInfo {
-  uid: string;
+  id: string;
   userId: string;
   username: string;
   email: string | null;
