@@ -75,8 +75,8 @@ export default function AdminPage() {
     return () => unsubscribe();
   }, [router]);
 
-  const handleToggleRole = async (uid: string, currentRole: UserRole) => {
-    const user = users.find(u => u.uid === uid);
+  const handleToggleRole = async (id: string, currentRole: UserRole) => {
+    const user = users.find(u => u.id === id);
     if (!user) return;
 
     // Master만 권한 변경 가능
@@ -108,8 +108,8 @@ export default function AdminPage() {
     }
   };
 
-  const handleDeleteUser = async (uid: string) => {
-    const user = users.find(u => u.uid === uid);
+  const handleDeleteUser = async (id: string) => {
+    const user = users.find(u => u.id === id);
     if (!user) return;
 
     // Master만 삭제 가능
