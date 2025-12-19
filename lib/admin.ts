@@ -1,4 +1,5 @@
 import { supabase } from "./supabase";
+import { Database } from "./database.types";
 
 // 권한 레벨
 export type UserRole = "master" | "manager" | "user";
