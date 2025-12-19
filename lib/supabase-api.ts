@@ -107,8 +107,8 @@ export async function fetchProjects(): Promise<Project[]> {
 export async function createProject(project: Omit<Project, 'id'>): Promise<Project | null> {
   const userId = await getCurrentUserId();
 
-  const { data, error } = await supabase
-    .from('projects')
+  const { data, error } = await (supabase
+    .from('projects') as any)
     .insert({
       user_id: userId,
       name: project.name,
@@ -146,8 +146,8 @@ export async function updateProject(
   if (updates.daysRemaining !== undefined) dbUpdates.days_remaining = updates.daysRemaining;
   if (updates.category !== undefined) dbUpdates.category = updates.category;
 
-  const { error } = await supabase
-    .from('projects')
+  const { error } = await (supabase
+    .from('projects') as any)
     .update(dbUpdates)
     .eq('id', projectId);
 
@@ -181,8 +181,8 @@ export async function fetchTasksByProject(projectId: string): Promise<Task[]> {
   const userId = await getCurrentUserId();
 
   // 작업과 할일을 함께 가져오기
-  const { data: tasks, error: tasksError } = await supabase
-    .from('tasks')
+  const { data: tasks, error: tasksError } = await (supabase
+    .from('tasks') as any)
     .select('*')
     .eq('user_id', userId)
     .eq('project_id', projectId)
@@ -191,9 +191,9 @@ export async function fetchTasksByProject(projectId: string): Promise<Task[]> {
   if (tasksError) throw tasksError;
 
   // 모든 할일 가져오기
-  const taskIds = tasks.map(t => t.id);
-  const { data: todos, error: todosError } = await supabase
-    .from('todos')
+  const taskIds = tasks.map((t: any) => t.id);
+  const { data: todos, error: todosError } = await (supabase
+    .from('todos') as any)
     .select('*')
     .in('task_id', taskIds)
     .order('order', { ascending: true });
@@ -202,7 +202,7 @@ export async function fetchTasksByProject(projectId: string): Promise<Task[]> {
 
   // 작업별로 할일 그룹화
   const todosByTask = new Map<string, Todo[]>();
-  todos.forEach(dbTodo => {
+  todos.forEach((dbTodo: any) => {
     const todo = dbTodoToTodo(dbTodo);
     if (!todosByTask.has(todo.taskId)) {
       todosByTask.set(todo.taskId, []);
@@ -210,14 +210,14 @@ export async function fetchTasksByProject(projectId: string): Promise<Task[]> {
     todosByTask.get(todo.taskId)!.push(todo);
   });
 
-  return tasks.map(dbTask => dbTaskToTask(dbTask, todosByTask.get(dbTask.id) || []));
+  return tasks.map((dbTask: any) => dbTaskToTask(dbTask, todosByTask.get(dbTask.id) || []));
 }
 
 export async function createTask(task: Omit<Task, 'id'>): Promise<string | null> {
   const userId = await getCurrentUserId();
 
-  const { data, error } = await supabase
-    .from('tasks')
+  const { data, error } = await (supabase
+    .from('tasks') as any)
     .insert({
       user_id: userId,
       project_id: task.projectId,
@@ -251,8 +251,8 @@ export async function updateTask(taskId: string, updates: Partial<Task>): Promis
   if (updates.completedDate !== undefined) dbUpdates.completed_date = updates.completedDate || null;
   if (updates.order !== undefined) dbUpdates.order = updates.order;
 
-  const { error } = await supabase
-    .from('tasks')
+  const { error } = await (supabase
+    .from('tasks') as any)
     .update(dbUpdates)
     .eq('id', taskId);
 
@@ -293,8 +293,8 @@ export async function updateTaskOrder(taskId: string, newOrder: number): Promise
 export async function createTodo(todo: Omit<Todo, 'id'>): Promise<string | null> {
   const userId = await getCurrentUserId();
 
-  const { data, error } = await supabase
-    .from('todos')
+  const { data, error } = await (supabase
+    .from('todos') as any)
     .insert({
       user_id: userId,
       task_id: todo.taskId,
@@ -328,8 +328,8 @@ export async function updateTodo(todoId: string, updates: Partial<Todo>): Promis
   if (updates.completedDate !== undefined) dbUpdates.completed_date = updates.completedDate || null;
   if (updates.order !== undefined) dbUpdates.order = updates.order;
 
-  const { error } = await supabase
-    .from('todos')
+  const { error } = await (supabase
+    .from('todos') as any)
     .update(dbUpdates)
     .eq('id', todoId);
 
@@ -407,8 +407,8 @@ export async function fetchIssuesByProject(projectId: string): Promise<Issue[]> 
 export async function createIssue(issue: Omit<Issue, 'id' | 'createdAt' | 'updatedAt'>): Promise<string | null> {
   const userId = await getCurrentUserId();
 
-  const { data, error } = await supabase
-    .from('issues')
+  const { data, error } = await (supabase
+    .from('issues') as any)
     .insert({
       user_id: userId,
       project_id: issue.projectId,
@@ -438,8 +438,8 @@ export async function updateIssue(issueId: string, updates: Partial<Issue>): Pro
   if (updates.priority !== undefined) dbUpdates.priority = updates.priority;
   if (updates.resolvedAt !== undefined) dbUpdates.resolved_at = updates.resolvedAt || null;
 
-  const { error } = await supabase
-    .from('issues')
+  const { error } = await (supabase
+    .from('issues') as any)
     .update(dbUpdates)
     .eq('id', issueId);
 
@@ -477,8 +477,8 @@ export async function createUserProfile(profile: {
   provider?: string;
 }): Promise<boolean> {
   try {
-    const { error } = await supabase
-      .from('users')
+    const { error } = await (supabase
+      .from('users') as any)
       .insert({
         user_id: profile.userId,
         username: profile.username,
@@ -511,8 +511,8 @@ export async function updateUserProfile(updates: {
   if (updates.email !== undefined) dbUpdates.email = updates.email || null;
   if (updates.displayName !== undefined) dbUpdates.display_name = updates.displayName || null;
 
-  const { error } = await supabase
-    .from('users')
+  const { error } = await (supabase
+    .from('users') as any)
     .update(dbUpdates)
     .eq('user_id', userId);
 
