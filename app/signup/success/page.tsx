@@ -41,8 +41,8 @@ export default function SignupSuccessPage() {
           });
         } else {
           setUserInfo({
-            userId: data.username,
-            username: data.display_name || data.username,
+            userId: data.username || user.email?.split("@")[0] || "user",
+            username: data.display_name || data.username || user.email || "Unknown",
           });
         }
       } catch (error) {
