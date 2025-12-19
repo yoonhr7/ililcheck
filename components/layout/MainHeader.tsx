@@ -3,6 +3,7 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { checkAdminStatus } from "@/lib/admin";
 import { logout } from "@/lib/auth";
+import { supabase } from "@/lib/supabase";
 import { LogOut, MessageCircleHeart, MoreVertical, Settings, Shield } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -12,16 +13,43 @@ export default function MainHeader() {
   const { user } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [displayName, setDisplayName] = useState<string>("사용자");
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const checkAdmin = async () => {
+    const loadUserData = async () => {
       if (user) {
-        const adminStatus = await checkAdminStatus(user.uid);
+        console.log('Current user:', user.email);
+        console.log('Master email from env:', process.env.NEXT_PUBLIC_MASTER_EMAIL);
+
+        // 관리자 권한 확인
+        const adminStatus = await checkAdminStatus(user.id);
+        console.log('Admin status:', adminStatus);
         setIsAdmin(adminStatus);
+
+        // users 테이블에서 displayName 가져오기
+        const { data, error } = await supabase
+          .from('users')
+          .select('display_name, username, role, email')
+          .eq('user_id', user.id)
+          .single();
+
+        console.log('User data from DB:', data);
+
+        if (data && !error) {
+          setDisplayName(data.display_name || data.username || user.email?.split('@')[0] || "사용자");
+        } else {
+          // users 테이블에 없으면 user_metadata에서 가져오기
+          setDisplayName(
+            user.user_metadata?.display_name ||
+            user.user_metadata?.username ||
+            user.email?.split('@')[0] ||
+            "사용자"
+          );
+        }
       }
     };
-    checkAdmin();
+    loadUserData();
   }, [user]);
 
   useEffect(() => {
@@ -52,7 +80,7 @@ export default function MainHeader() {
 
       <div className={styles.right}>
         <span className={styles.welcome}>
-          <b>{user?.displayName || "사용자"}</b> 님 환영합니다 <MessageCircleHeart className={styles.icon}/>
+          <b>{displayName}</b> 님 환영합니다 <MessageCircleHeart className={styles.icon}/>
         </span>
 
         <div className={styles.menuContainer} ref={menuRef}>
@@ -86,7 +114,7 @@ export default function MainHeader() {
               )}
 
               <Link
-                href="/profile"
+                href="/dashboard/settings"
                 className={styles.dropdownLink}
                 onClick={() => setIsMenuOpen(false)}
               >

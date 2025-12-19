@@ -476,26 +476,27 @@ export async function createUserProfile(profile: {
   displayName?: string;
   provider?: string;
 }): Promise<boolean> {
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return false;
+  try {
+    const { error } = await supabase
+      .from('users')
+      .insert({
+        user_id: profile.userId,
+        username: profile.username,
+        email: profile.email || null,
+        display_name: profile.displayName || null,
+        provider: profile.provider || 'email',
+      });
 
-  const { error } = await supabase
-    .from('user_profiles')
-    .insert({
-      id: user.id,
-      user_id: profile.userId,
-      username: profile.username,
-      email: profile.email || null,
-      display_name: profile.displayName || null,
-      provider: profile.provider || 'email',
-    });
+    if (error) {
+      console.error('사용자 프로필 생성 실패:', error);
+      throw error;
+    }
 
-  if (error) {
-    console.error('사용자 프로필 생성 실패:', error);
-    return false;
+    return true;
+  } catch (error) {
+    console.error('사용자 프로필 생성 중 오류:', error);
+    throw error;
   }
-
-  return true;
 }
 
 export async function updateUserProfile(updates: {
@@ -511,9 +512,9 @@ export async function updateUserProfile(updates: {
   if (updates.displayName !== undefined) dbUpdates.display_name = updates.displayName || null;
 
   const { error } = await supabase
-    .from('user_profiles')
+    .from('users')
     .update(dbUpdates)
-    .eq('id', userId);
+    .eq('user_id', userId);
 
   if (error) {
     console.error('사용자 프로필 업데이트 실패:', error);

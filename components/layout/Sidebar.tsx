@@ -5,7 +5,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useCategory } from "@/contexts/CategoryContext";
 import { fetchProjects } from "@/lib/api";
 import type { Project, ProjectCategory } from "@/lib/types";
-import { Calendar, FileText, Home, NotepadText, Plus } from "lucide-react";
+import { Calendar, FileText, Home, NotepadText, Plus, Settings } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -15,6 +15,7 @@ const navigation = [
   { name: "오늘의 할 일", href: "/dashboard/today", icon: NotepadText },
   { name: "달력", href: "/dashboard/calendar", icon: Calendar },
   { name: "보고서", href: "/dashboard/reports", icon: FileText },
+  { name: "내 정보", href: "/dashboard/settings", icon: Settings },
 ];
 
 export default function Sidebar() {

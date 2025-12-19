@@ -34,6 +34,11 @@ export default function SignupPage() {
       return;
     }
 
+    if (!email.trim()) {
+      setError('이메일을 입력해주세요.');
+      return;
+    }
+
     if (password !== confirmPassword) {
       setError('비밀번호가 일치하지 않습니다.');
       return;
@@ -49,12 +54,12 @@ export default function SignupPage() {
     const { user, error } = await signUpWithEmail(userId, email, password, username);
 
     if (error) {
-      setError('회원가입에 실패했습니다. 다시 시도해주세요.');
+      setError(error || '회원가입에 실패했습니다. 다시 시도해주세요.');
       setLoading(false);
       return;
     }
 
-    router.push('/dashboard/today');
+    router.push('/signup/success');
   };
 
   const handleGoogleSignup = async () => {
@@ -110,13 +115,14 @@ export default function SignupPage() {
           </div>
 
           <div className={styles.inputGroup}>
-            <label className={styles.label}>이메일 (선택)</label>
+            <label className={styles.label}>이메일</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className={styles.input}
               placeholder="email@example.com"
+              required
             />
           </div>
 
