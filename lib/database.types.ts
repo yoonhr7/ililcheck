@@ -47,6 +47,41 @@ export interface Database {
           updated_at?: string
         }
       }
+      users: {
+        Row: {
+          id: string
+          user_id: string
+          username: string | null
+          email: string | null
+          display_name: string | null
+          provider: string
+          role: string
+          created_at: string
+          last_login_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          username?: string | null
+          email?: string | null
+          display_name?: string | null
+          provider?: string
+          role?: string
+          created_at?: string
+          last_login_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          username?: string | null
+          email?: string | null
+          display_name?: string | null
+          provider?: string
+          role?: string
+          created_at?: string
+          last_login_at?: string
+        }
+      }
       projects: {
         Row: {
           id: string

@@ -53,8 +53,8 @@ export default function SettingsPage() {
       }
 
       const userProfile: UserProfile = {
-        userId: data.username,
-        username: data.username,
+        userId: data.user_id,
+        username: data.username || '',
         email: data.email || user.email || '',
         displayName: data.display_name || '',
         provider: data.provider || 'email',
