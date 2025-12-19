@@ -404,7 +404,7 @@ export async function fetchIssuesByProject(projectId: string): Promise<Issue[]> 
   return data.map(dbIssueToIssue);
 }
 
-export async function createIssue(issue: Omit<Issue, 'id'>): Promise<string | null> {
+export async function createIssue(issue: Omit<Issue, 'id' | 'createdAt' | 'updatedAt'>): Promise<string | null> {
   const userId = await getCurrentUserId();
 
   const { data, error } = await supabase
