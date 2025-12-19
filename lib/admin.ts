@@ -1,7 +1,7 @@
-import { supabase } from './supabase';
+import { supabase } from "./supabase";
 
 // 권한 레벨
-export type UserRole = 'master' | 'manager' | 'user';
+export type UserRole = "master" | "manager" | "user";
 
 interface UserInfoDisplay {
   id: string;
@@ -21,27 +21,31 @@ interface UserInfoDisplay {
 export async function fetchAllUsers(): Promise<UserInfoDisplay[]> {
   try {
     const { data: users, error } = await supabase
-      .from('users')
-      .select('*')
-      .order('created_at', { ascending: false });
+      .from("users")
+      .select("*")
+      .order("created_at", { ascending: false });
 
     if (error) {
-      console.error('사용자 목록 조회 실패:', error);
+      console.error("사용자 목록 조회 실패:", error);
       return [];
     }
 
     return (users || []).map((user: any) => ({
       id: user.user_id,
-      userId: user.username || '-',
-      username: user.display_name || '-',
+      userId: user.username || "-",
+      username: user.display_name || "-",
       email: user.email || null,
       displayName: user.display_name || null,
-      createdAt: user.created_at ? new Date(user.created_at).toLocaleString('ko-KR') : '-',
-      lastLoginAt: user.last_login_at ? new Date(user.last_login_at).toLocaleString('ko-KR') : '-',
-      provider: user.provider || 'unknown',
+      createdAt: user.created_at
+        ? new Date(user.created_at).toLocaleString("ko-KR")
+        : "-",
+      lastLoginAt: user.last_login_at
+        ? new Date(user.last_login_at).toLocaleString("ko-KR")
+        : "-",
+      provider: user.provider || "unknown",
     }));
   } catch (error) {
-    console.error('사용자 목록 조회 실패:', error);
+    console.error("사용자 목록 조회 실패:", error);
     return [];
   }
 }
@@ -53,25 +57,25 @@ export async function getUserRole(uid: string): Promise<UserRole> {
   try {
     // users 테이블에서 role 확인
     const { data: user, error } = await supabase
-      .from('users')
-      .select('role, email')
-      .eq('user_id', uid)
+      .from("users")
+      .select("role, email")
+      .eq("user_id", uid)
       .single();
 
     if (error || !user) {
-      return 'user';
+      return "user";
     }
 
     // Master 계정 확인 (환경변수)
     const masterEmail = process.env.NEXT_PUBLIC_MASTER_EMAIL;
     if (masterEmail && user.email === masterEmail) {
-      return 'master';
+      return "master";
     }
 
-    return (user.role as UserRole) || 'user';
+    return (user.role as UserRole) || "user";
   } catch (error) {
-    console.error('사용자 역할 확인 실패:', error);
-    return 'user';
+    console.error("사용자 역할 확인 실패:", error);
+    return "user";
   }
 }
 
@@ -80,7 +84,7 @@ export async function getUserRole(uid: string): Promise<UserRole> {
  */
 export async function checkAdminStatus(uid: string): Promise<boolean> {
   const role = await getUserRole(uid);
-  return role === 'master' || role === 'manager';
+  return role === "master" || role === "manager";
 }
 
 /**
@@ -89,18 +93,18 @@ export async function checkAdminStatus(uid: string): Promise<boolean> {
 export async function grantManagerRole(uid: string): Promise<boolean> {
   try {
     const { error } = await supabase
-      .from('users')
-      .update({ role: 'manager' })
-      .eq('user_id', uid);
+      .from("users")
+      .update({ role: "manager" })
+      .eq("user_id", uid);
 
     if (error) {
-      console.error('Manager 권한 부여 실패:', error);
+      console.error("Manager 권한 부여 실패:", error);
       return false;
     }
 
     return true;
   } catch (error) {
-    console.error('Manager 권한 부여 실패:', error);
+    console.error("Manager 권한 부여 실패:", error);
     return false;
   }
 }
@@ -111,18 +115,18 @@ export async function grantManagerRole(uid: string): Promise<boolean> {
 export async function revokeAdminRole(uid: string): Promise<boolean> {
   try {
     const { error } = await supabase
-      .from('users')
-      .update({ role: 'user' })
-      .eq('user_id', uid);
+      .from("users")
+      .update({ role: "user" })
+      .eq("user_id", uid);
 
     if (error) {
-      console.error('권한 제거 실패:', error);
+      console.error("권한 제거 실패:", error);
       return false;
     }
 
     return true;
   } catch (error) {
-    console.error('권한 제거 실패:', error);
+    console.error("권한 제거 실패:", error);
     return false;
   }
 }
@@ -145,22 +149,21 @@ export async function isUserAdmin(uid: string): Promise<boolean> {
 /**
  * 사용자 삭제 (Master만 가능)
  */
-export async function deleteUser(uid: string): Promise<{ success: boolean; error?: string }> {
+export async function deleteUser(
+  uid: string
+): Promise<{ success: boolean; error?: string }> {
   try {
     // users 테이블에서 삭제 (CASCADE로 auth.users도 삭제됨)
-    const { error } = await supabase
-      .from('users')
-      .delete()
-      .eq('user_id', uid);
+    const { error } = await supabase.from("users").delete().eq("user_id", uid);
 
     if (error) {
-      console.error('사용자 삭제 실패:', error);
+      console.error("사용자 삭제 실패:", error);
       return { success: false, error: error.message };
     }
 
     return { success: true };
   } catch (error: any) {
-    console.error('사용자 삭제 실패:', error);
+    console.error("사용자 삭제 실패:", error);
     return { success: false, error: error.message };
   }
 }

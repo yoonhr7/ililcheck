@@ -45,7 +45,7 @@ export default function SettingsPage() {
         .from("users")
         .select("*")
         .eq("user_id", user.id)
-        .single<Database['public']['Tables']['users']['Row']>();
+        .single<Database["public"]["Tables"]["users"]["Row"]>();
 
       if (error || !data) {
         console.error("프로필 로드 실패:", error);

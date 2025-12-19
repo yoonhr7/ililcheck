@@ -5,7 +5,13 @@ import { checkAdminStatus } from "@/lib/admin";
 import { logout } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
 import { Database } from "@/lib/database.types";
-import { LogOut, MessageCircleHeart, MoreVertical, Settings, Shield } from "lucide-react";
+import {
+  LogOut,
+  MessageCircleHeart,
+  MoreVertical,
+  Settings,
+  Shield,
+} from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import styles from "./MainHeader.module.css";
@@ -20,32 +26,40 @@ export default function MainHeader() {
   useEffect(() => {
     const loadUserData = async () => {
       if (user) {
-        console.log('Current user:', user.email);
-        console.log('Master email from env:', process.env.NEXT_PUBLIC_MASTER_EMAIL);
+        console.log("Current user:", user.email);
+        console.log(
+          "Master email from env:",
+          process.env.NEXT_PUBLIC_MASTER_EMAIL
+        );
 
         // 관리자 권한 확인
         const adminStatus = await checkAdminStatus(user.id);
-        console.log('Admin status:', adminStatus);
+        console.log("Admin status:", adminStatus);
         setIsAdmin(adminStatus);
 
         // users 테이블에서 displayName 가져오기
         const { data, error } = await supabase
-          .from('users')
-          .select('display_name, username, role, email')
-          .eq('user_id', user.id)
-          .single<Database['public']['Tables']['users']['Row']>();
+          .from("users")
+          .select("display_name, username, role, email")
+          .eq("user_id", user.id)
+          .single<Database["public"]["Tables"]["users"]["Row"]>();
 
-        console.log('User data from DB:', data);
+        console.log("User data from DB:", data);
 
         if (data && !error) {
-          setDisplayName(data.display_name || data.username || user.email?.split('@')[0] || "사용자");
+          setDisplayName(
+            data.display_name ||
+              data.username ||
+              user.email?.split("@")[0] ||
+              "사용자"
+          );
         } else {
           // users 테이블에 없으면 user_metadata에서 가져오기
           setDisplayName(
             user.user_metadata?.display_name ||
-            user.user_metadata?.username ||
-            user.email?.split('@')[0] ||
-            "사용자"
+              user.user_metadata?.username ||
+              user.email?.split("@")[0] ||
+              "사용자"
           );
         }
       }
@@ -81,7 +95,8 @@ export default function MainHeader() {
 
       <div className={styles.right}>
         <span className={styles.welcome}>
-          <b>{displayName}</b> 님 환영합니다 <MessageCircleHeart className={styles.icon}/>
+          <b>{displayName}</b> 님 환영합니다{" "}
+          <MessageCircleHeart className={styles.icon} />
         </span>
 
         <div className={styles.menuContainer} ref={menuRef}>
@@ -125,8 +140,8 @@ export default function MainHeader() {
           )}
         </div>
         <button onClick={handleLogout} className={styles.logoutButton}>
-            <LogOut className={styles.icon} />
-          </button>
+          <LogOut className={styles.icon} />
+        </button>
       </div>
     </header>
   );
