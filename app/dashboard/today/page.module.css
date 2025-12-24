@@ -64,24 +64,6 @@
   margin: 0;
 }
 
-.statsChips {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-.statChip {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.125rem 0.625rem;
-  border-radius: 1rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  background-color: #eff6ff;
-  color: #3b82f6;
-  border: 1px solid #3b82f6;
-  white-space: nowrap;
-}
 
 /* 모드 토글 버튼 */
 .modeToggle {
@@ -193,42 +175,31 @@
   transition: all 0.2s;
 }
 
-.filterButton:hover {
+.filterButton:hover:not(:disabled) {
   background: #f9fafb;
   border-color: #9ca3af;
 }
 
-/* 각 필터별 활성화 색상 */
-.filterButton.active:not(.filterTodo):not(.filterInProgress):not(
-    .filterCompleted
-  ):not(.filterOnHold) {
+.filterButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* 체크 아이콘 기본 스타일 */
+.filterButton svg {
+  color: #d1d5db;
+  transition: color 0.2s;
+}
+
+/* 모든 필터 활성화 시 파란색으로 통일 */
+.filterButton.active {
   color: #3b82f6;
   border-color: #3b82f6;
   background-color: #eff6ff;
 }
 
-.filterTodo.active {
-  color: #6b7280;
-  border-color: #6b7280;
-  background-color: #f3f4f6;
-}
-
-.filterInProgress.active {
-  color: #22c55e;
-  border-color: #22c55e;
-  background-color: #f0fdf4;
-}
-
-.filterCompleted.active {
+.filterButton.active svg {
   color: #3b82f6;
-  border-color: #3b82f6;
-  background-color: #eff6ff;
-}
-
-.filterOnHold.active {
-  color: #f59e0b;
-border-color: #f59e0b;
-  background-color: #fffbeb;
 }
 
 /* 프로젝트 컨테이너 */
@@ -474,7 +445,6 @@ border-color: #f59e0b;
 
 .todoItem {
   display: flex;
-  flex-direction: column;
   padding: 1rem;
   transition: background-color 0.2s;
   gap: 0.75rem;
@@ -679,36 +649,87 @@ border-color: #f59e0b;
   gap: 0.5rem;
   opacity: 1;
   flex-wrap: wrap;
+  position: relative;
 }
 
-.todoActionBtn {
+.dropdownWrapper {
+  position: relative;
+}
+
+.moreBtn {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
-  font-size: 0.75rem;
-  font-weight: 500;
+  justify-content: center;
+  padding: 0.375rem;
+  border-radius: 0.375rem;
   border: 1px solid transparent;
   background-color: transparent;
   color: #6b7280;
-  white-space: nowrap;
   cursor: pointer;
   transition: all 0.2s;
 }
 
-.todoActionBtn:hover {
-  background-color: white;
-  border-color: #d1d5db;
+.moreBtn:hover {
+  background-color: #f3f4f6;
+  border-color: #e5e7eb;
 }
 
-.deleteBtn {
+.dropdownBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.25rem;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  min-width: 10rem;
+  z-index: 50;
+  overflow: hidden;
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: none;
+  background-color: transparent;
+  color: #374151;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.dropdownItem:hover {
+  background-color: #f9fafb;
+}
+
+.dropdownItem.deleteItem {
   color: #ef4444;
 }
 
-.deleteBtn:hover {
+.dropdownItem.deleteItem:hover {
   background-color: #fef2f2;
-  border-color: #ef4444;
+}
+
+.dropdownDivider {
+  height: 1px;
+  background-color: #e5e7eb;
+  margin: 0.25rem 0;
 }
 
 /* 빈 상태 */

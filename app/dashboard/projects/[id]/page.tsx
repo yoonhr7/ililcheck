@@ -3,6 +3,7 @@
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
 import DonutChart from "@/components/ui/DonutChart";
 import ProgressDots from "@/components/ui/ProgressDots";
+import FloatingButtonGroup from "@/components/ui/FloatingButtonGroup";
 import EditProjectDrawer from "@/components/modals/EditProjectDrawer";
 import { useAuth } from "@/contexts/AuthContext";
 import {
@@ -2181,22 +2182,23 @@ export default function ProjectDetailPage() {
         </div>
       </div>
       {/* Floating 모드 토글 버튼 */}
-      <div className={styles.floatingToggle}>
-        <button
-          onClick={() => setViewMode("manage")}
-          className={`${styles.floatingButton} ${viewMode === "manage" ? styles.floatingButtonActive : ""}`}
-        >
-          <MousePointer2 className={styles.buttonIcon} />
-          관리모드
-        </button>
-        <button
-          onClick={() => setViewMode("summary")}
-          className={`${styles.floatingButton} ${viewMode === "summary" ? styles.floatingButtonActive : ""}`}
-        >
-          <Notebook className={styles.buttonIcon} />
-          요약모드
-        </button>
-      </div>
+      <FloatingButtonGroup
+        buttons={[
+          {
+            id: "manage",
+            label: "관리모드",
+            icon: <MousePointer2 />,
+            onClick: () => setViewMode("manage"),
+          },
+          {
+            id: "summary",
+            label: "요약모드",
+            icon: <Notebook />,
+            onClick: () => setViewMode("summary"),
+          },
+        ]}
+        activeButtonId={viewMode}
+      />
 
       {/* 프로젝트 수정 Drawer */}
       <EditProjectDrawer
